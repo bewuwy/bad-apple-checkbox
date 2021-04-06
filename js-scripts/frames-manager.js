@@ -1,4 +1,5 @@
 function start() {
+setTimeout(function() { document.getElementById('audio').play(); }, 100)
 setTimeout(f1, 0);
 setTimeout(f2, 100);
 setTimeout(f3, 200);

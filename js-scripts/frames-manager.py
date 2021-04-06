@@ -2,8 +2,8 @@ from os import listdir
 
 
 frame_len = 100
-frames_folder = "/frames"
-js = []
+frames_folder = "../frames"
+js = ["setTimeout(function() { document.getElementById('audio').play(); }, 0)"]
 
 
 for i in range(len(listdir(frames_folder))):
