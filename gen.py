@@ -23,10 +23,11 @@ if __name__ == '__main__':
     templatesFolder = argv[5]
     # ffmpeg -i in.mp4 -vf fps=20 -s 48x36 -vsync 0 frames/f%5d.png
 
-    image_processer.main(getcwd()+"\\frames", getcwd()+"\\frames.js")
-    print("generated frames.js")
-    frames_manager.main(getcwd()+"\\frames", fps, getcwd()+"\\frames-manager.js")
-    print("generated frames-manager.js")
+    frames = getcwd()+'\\frames'
+    image_processer.main(frames, frames + ".js")
+    print(f"generated {frames + '.js'}")
+    frames_manager.main(frames, fps, frames + "-manager.js")
+    print(f"generated {frames + '-manager.js'}")
 
     templateEnv = jinja2.Environment(loader=jinja2.FileSystemLoader(searchpath=templatesFolder))
     TEMPLATE_FILE = "default.html"

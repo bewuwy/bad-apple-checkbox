@@ -13,17 +13,20 @@ def main(frames_folder, fps, output):
           "    document.getElementById(id).style.opacity = state;\n"
           "  }\n"
           "}\n"
+          ""
           "function frame(fr_n) {\n"
           "  fr = frames[fr_n];\n"
-          "  for (i=0; i < fr.length; i++) {\n"
-          "    set(fr[i][0], fr[i][1]);\n"
+          "  for(var key in fr) {\n"
+          "    set(key, fr[key]);\n"
           "  }\n"
           "}\n\n"
+          ""
           "function start() {\n" +
           "  setTimeout(function() { document.getElementById('audio').play(); }, 0);\n"
           "  for (i=0; i<" + str(len(listdir(frames_folder))) + "; i++) {\n"
           f"    setTimeout(frame, {int(1000 / int(fps))}*i, i);\n"
           "  }\n"
+          ""
           "return 0;\n}\n")
 
     with open(output, "w") as f:

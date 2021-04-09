@@ -5,23 +5,6 @@
     <title>{{ title }}</title>
 
     <script>
-      function set(id, state) {
-        if (state == false) {
-            document.getElementById(id).checked = state;
-        }
-        else {
-            document.getElementById(id).checked = true;
-            document.getElementById(id).style.opacity = state;
-        }
-      }
-      function toggle(id) {
-        if (document.getElementById(id).checked) {
-          document.getElementById(id).checked = false;
-        }
-        else {
-          document.getElementById(id).checked = true;
-        }
-      }
       function uncheckAll() {
         for (var i = 0; i < document.getElementsByTagName("input").length; i++) {
             document.getElementsByTagName("input")[i].checked = false;
