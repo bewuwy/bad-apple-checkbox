@@ -8,9 +8,9 @@ def chunks(lst, n):
         yield lst[i:i + n]
 
 
-# ffmpeg -i in.mp4 -vf fps=20 -s 48x36 -vsync 0 frames/f%d.png
+# ffmpeg -i in.mp4 -vf fps=20 -s 48x36 -vsync 0 frames/f%5d.png
 def main(frames_folder, output):
-    func_list = []
+    frame_list = []
 
     for fr in listdir(frames_folder):
         print(fr)
@@ -23,21 +23,16 @@ def main(frames_folder, output):
 
         pixels = list(chunks(pixels, im.width))
 
-        js = []
+        p_list = []
         for a in range(len(pixels)):
             for b in range(len(pixels[a])):
-                if pixels[a][b] < 0.4:
-                    js.append(f"set(\"{a}-{b}\", false);")
-                else:
-                    js.append(f"set(\"{a}-{b}\", true);"
-                              f"document.getElementById(\"{a}-{b}\").style.opacity={pixels[a][b]};")
+                p_list.append([f"{a}-{b}", pixels[a][b]])
 
-        js = "function " + fr.split(".")[0] + "() {" + " ".join(js) + "}"
-        func_list.append(js)
+        frame_list.append(p_list)
 
     with open(output, "w") as f:
-        f.write("\n".join(func_list))
-    print("saved funcs to file")
+        f.write(f"var frames={frame_list};\n")
+    print("saved frames to file")
 
 
 if __name__ == '__main__':

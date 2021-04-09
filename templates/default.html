@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ title }}</title>
+
+    <script>
+      function set(id, state) {
+        if (state == false) {
+            document.getElementById(id).checked = state;
+        }
+        else {
+            document.getElementById(id).checked = true;
+            document.getElementById(id).style.opacity = state;
+        }
+      }
+      function toggle(id) {
+        if (document.getElementById(id).checked) {
+          document.getElementById(id).checked = false;
+        }
+        else {
+          document.getElementById(id).checked = true;
+        }
+      }
+      function uncheckAll() {
+        for (var i = 0; i < document.getElementsByTagName("input").length; i++) {
+            document.getElementsByTagName("input")[i].checked = false;
+        }
+      }
+    </script>
+    <script src='frames.js'></script>
+    <script src='frames-manager.js'></script>
+  </head>
+  <body onload="uncheckAll();">
+    <div style="background-color: white;">
+        <div style="padding: 1%;">
+			<center>
+					{% for a in range(height) %}
+					<div>
+					{% for b in range(width) %}    <input type="checkbox" id="{{a}}-{{b}}">
+					{% endfor %}</div>{% endfor %}
+			</center>
+		</div>
+		<center>
+		  <button onclick="start();">start</button>
+
+		  <br />
+		  <br />
+		  {% if audio %}
+		    <audio id="audio" controls>
+              <source src="{{ audio }}" type="audio/mpeg">
+            </audio>
+		  {% endif %}
+		  
+		  <br />
+		  <br />
+		  <footer>
+			<h3><a href="https://github.com/bewuwy/bad-apple-checkbox">github repo</a></h3>
+		  </footer>
+		</center>
+    </div>
+  </body>
+</html>
