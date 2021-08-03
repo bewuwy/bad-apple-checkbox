@@ -4,13 +4,13 @@ import sys
 
 def main(frames_folder, fps, output):
     js = ("function set(id, state) {\n"
-          "  if (state == false || state < 0.4) {\n"
-          "    document.getElementById(id).checked = false;\n"
-          "    document.getElementById(id).style.opacity = 1;\n"
+          "  if (state == false || state < 0.7) {\n"
+          "    document.getElementById(id).checked = true;\n"
+          "    document.getElementById(id).style.opacity = 1 - state;\n"
           "  }\n"
           "  else {\n"
-          "    document.getElementById(id).checked = true;\n"
-          "    document.getElementById(id).style.opacity = state;\n"
+          "    document.getElementById(id).checked = false;\n"
+          "    document.getElementById(id).style.opacity = 1;\n"
           "  }\n"
           "}\n"
           ""

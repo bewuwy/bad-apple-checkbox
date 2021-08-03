@@ -11,7 +11,12 @@
         }
       }
     </script>
-    <script src='frames.js'></script>
+  	{% for file in range(files_n) %}
+    	<script src='frames{{ file }}.js'></script>
+  	{% endfor %}
+  	<script>
+		const frames = frames0.concat({% for f in range(1, files_n) %} frames{{ f }} {% if not loop.last %},{% endif %} {%endfor %});
+	</script>
     <script src='frames-manager.js'></script>
   </head>
   <body onload="uncheckAll();">
@@ -19,9 +24,12 @@
         <div style="padding: 1%;">
 			<center>
 					{% for a in range(height) %}
-					<div>
-					{% for b in range(width) %}    <input type="checkbox" id="{{a}}-{{b}}">
-					{% endfor %}</div>{% endfor %}
+						<div>
+						{% for b in range(width) %}
+							<input type="checkbox" id="{{a}}-{{b}}">
+						{% endfor %}
+						</div>
+					{% endfor %}
 			</center>
 		</div>
 		<center>

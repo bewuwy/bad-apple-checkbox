@@ -10,11 +10,12 @@ def chunks(lst, n):
 
 # ffmpeg -i in.mp4 -vf fps=20 -s 48x36 -vsync 0 frames/f%5d.png
 def main(frames_folder, output):
+    file_n = 0
     frame_list = []
     lastFrame = []
 
     for fr in listdir(frames_folder):
-        print(fr, end="\r")
+        print(f"{fr} / {len(listdir(frames_folder))}", end="\r")
 
         im = Image.open(frames_folder+f"/{fr}").convert("LA")
         pixels = list(im.getdata())
@@ -36,9 +37,15 @@ def main(frames_folder, output):
 
         frame_list.append(p_dict)
 
-    with open(output, "w") as f:
-        f.write(f"var frames={frame_list};\n")
-    print("saved frames to file")
+        split = 1400
+        if len(frame_list) > split or (file_n * (split + 1)) + len(frame_list) >= len(listdir(frames_folder)):
+            with open(f"{output}{file_n}.js", "w") as f:
+                f.write(f"var frames{file_n}={frame_list};\n")
+            print(f"\nsaved frames{file_n} to file")
+            frame_list = []
+            file_n += 1
+
+    return file_n
 
 
 if __name__ == '__main__':
